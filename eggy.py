@@ -23,7 +23,7 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 
-#init pygame / create window
+# init pygame / create window
 pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -31,6 +31,8 @@ pygame.display.set_caption("eggy mceggy and friends")
 clock = pygame.time.Clock()
 
 font_name = pygame.font.match_font('arial')
+
+
 def text_draw(surf, text, size, x, y):
     font = pygame.font.Font(font_name, size)
     text_surface = font.render(text, True, ((23, 11, 128)))
@@ -38,12 +40,14 @@ def text_draw(surf, text, size, x, y):
     text_rect.midtop = (x, y)
     surf.blit(text_surface, text_rect)
 
+
 def draw_lives(surf, x, y, lives, img):
     for i in range(lives):
         img_rect = img.get_rect()
         img_rect.x = x + 30 * i
         img_rect.y = y
         surf.blit(img, img_rect)
+
 
 class Eggy(pygame.sprite.Sprite):
     def __init__(self):
@@ -53,9 +57,9 @@ class Eggy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.radius = 20
         # pygame.draw.circle(self.image, RED, self.rect.center, self.radius)
-        self.rect.centerx = WIDTH - 40 
+        self.rect.centerx = WIDTH - 40
         self.rect.bottom = HEIGHT / 2
-        self.speedx = 0 
+        self.speedx = 0
         self.speedy = 0
         self.pew_delay = 125
         self.last_pew = pygame.time.get_ticks()
@@ -63,12 +67,11 @@ class Eggy(pygame.sprite.Sprite):
         self.hidden = False
         self.hide_timer = pygame.time.get_ticks()
 
-
     def update(self):
         if self.hidden and pygame.time.get_ticks() - self.hide_timer > 0:
             self.hidden = False
             self.rect.centerx = WIDTH - 40
-            self.rect.bottom =HEIGHT / 2
+            self.rect.bottom = HEIGHT / 2
         self.speedx = 0
         self.speedy = 0
         keystate = pygame.key.get_pressed()
@@ -84,7 +87,7 @@ class Eggy(pygame.sprite.Sprite):
         self.rect.x += self.speedx
         if keystate[pygame.K_SPACE]:
             self.shoot()
-        
+
         if self.rect.bottom > HEIGHT:
             self.rect.bottom = HEIGHT
         if self.rect.y < 0:
@@ -93,8 +96,8 @@ class Eggy(pygame.sprite.Sprite):
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
         if self.rect.left < 0:
-            self.rect.left = 0  
-        
+            self.rect.left = 0
+
     def shoot(self):
         now = pygame.time.get_ticks()
         if now - self.last_pew > self.pew_delay:
@@ -103,13 +106,13 @@ class Eggy(pygame.sprite.Sprite):
             all_sprites.add(triangle)
             triangles.add(triangle)
             pew_sound.play()
-        
+
     def hide(self):
         self.hidden = True
         self.hide_timer = pygame.time.get_ticks()
         self.rect.center = (WIDTH - 40 / 2, HEIGHT / 2)
         screen.fill(pygame.Color("black"))
-        
+
 
 class Buds(pygame.sprite.Sprite):
     def __init__(self):
@@ -118,7 +121,7 @@ class Buds(pygame.sprite.Sprite):
         self.image_orig.set_colorkey(BLACK)
         self.image = self.image_orig.copy()
         self.rect = self.image.get_rect()
-        self.radius = int(self.rect.width *.85 / 2)
+        self.radius = int(self.rect.width * .85 / 2)
         self.rect.x = random.randrange(WIDTH - self.rect.width)
         self.rect.y = random.randrange(-150, -100)
         self.speedy = random.randrange(1, 8)
@@ -146,11 +149,12 @@ class Buds(pygame.sprite.Sprite):
             self.rect.x = random.randrange(WIDTH - self.rect.width)
             self.rect.y = random.randrange(-100, -40)
             self.speedx = random.randrange(1, 8)
-    
+
     def hide(self):
         self.hidden = True
         self.hide_timer = pygame.time.get_ticks()
         self.rect.center = (WIDTH / 2, HEIGHT - 40)
+
 
 class Triangle(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -167,6 +171,7 @@ class Triangle(pygame.sprite.Sprite):
         # delete if moves off the top of the screen
         if self.rect.bottom < 0:
             self.kill()
+
 
 class Explosion(pygame.sprite.Sprite):
     def __init__(self, center, size):
@@ -192,13 +197,16 @@ class Explosion(pygame.sprite.Sprite):
                 self.rect = self.image.get_rect()
                 self.rect.center = center
 
+
 def show_go_screen():
     screen.blit(background, background_rect)
-    text_draw(screen, "eggy mceggy and friends", 105, WIDTH / 2, HEIGHT / 1.75)
-    text_draw(screen, "space makes triangles / arrows to move", 30, WIDTH / 2, HEIGHT / 1.90)
+    text_draw(screen, "eggy", 105, WIDTH / 2, HEIGHT / 2.25)
+    text_draw(screen, "mceggy and friends", 105, WIDTH / 2, HEIGHT / 1.75)
+    text_draw(screen, "spacebar shoots triangles / arrows are used to move",
+              30, WIDTH / 2, HEIGHT / 2.2)
     text_draw(screen, "press a key to start", 30, WIDTH / 2, HEIGHT * 3 / 4)
     pygame.display.flip()
-    waiting = True 
+    waiting = True
     while waiting:
         clock.tick(FPS)
         for event in pygame.event.get():
@@ -206,6 +214,7 @@ def show_go_screen():
                 pygame.quit()
             if event.type == pygame.KEYUP:
                 waiting = False
+
 
 # load sprites
 background = pygame.image.load(path.join(img_dir, "clouds2.png")).convert()
@@ -234,7 +243,7 @@ for j in range(5):
     filename = 'p{}.png'.format(j)
     img = pygame.image.load(path.join(img_dir, filename)).convert()
     img.set_colorkey(BLACK)
-    img = pygame.transform.scale(img, (40,40))
+    img = pygame.transform.scale(img, (40, 40))
     explosion_anim['eggy'].append(img)
 
 # load snds
@@ -276,7 +285,6 @@ while running:
             if event.key == pygame.K_SPACE:
                 eggy.shoot()
 
-
     # update
     all_sprites.update()
 
@@ -294,22 +302,18 @@ while running:
     if eggy.lives == 0 and not die.alive():
         no_game = True
 
-
-
     # was triangle given
-    hits = pygame.sprite.spritecollide(eggy, buds, True, pygame.sprite.pygame.sprite.collide_circle)
-    for hit in hits: 
+    hits = pygame.sprite.spritecollide(
+        eggy, buds, True, pygame.sprite.pygame.sprite.collide_circle)
+    for hit in hits:
         eggy_die_sound.play()
         die = Explosion(eggy.rect.center, 'eggy')
         all_sprites.add(die)
         eggy.hide()
         eggy.lives -= 1
 
-
     if eggy.lives == 0 and not die.alive():
         no_game = True
-
-            
 
     # draw stuff
     screen.fill(BLACK)
