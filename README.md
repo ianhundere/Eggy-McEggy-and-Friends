@@ -1,15 +1,23 @@
-# eggy-mcggy-and-friends
+# Eggy McEggy and Friends
 
-a simple shooter made in pygame
+## Synopsis
+A  simple shooter made with Python using Pygame library. The player has 3 lives and must shoot as many friends with their life saving triangles as they can before being touched.
+
+## Music / Sounds
+A music and sound were created myself. Most of my music can be found a the link below:
+
+[Bandcamp](https://grassnose.bandcamp.com/)
+[SoundCloud](https://soundcloud.com/grassnose)
+[Clyp.it](https://clyp.it/user/3b2ltmbv)
 
 ## How to Play
 
-i used python3 to make this, be sure to have python and to install py game (pip install pygame).
+Be sure to have Python and install using ```py game (pip install pygame)```.
 
-to run use the following command:
+To run use the following command:
 
-pythonw eggy.py
+```pythonw eggy.py```
 
-hope you enjoy my adventure in pygame / more info can be found in the comments of eggy.py
+Hope you enjoy my adventure in Pygame. Further info can be found in the comments section of eggy.py
 
 ![Eggy Screenshots](/eggy.gif)
