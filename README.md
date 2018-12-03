@@ -3,6 +3,11 @@
 ## Synopsis
 A  simple shooter made with Python using Pygame library. The player has 3 lives and must shoot as many friends with their life saving triangles as they can before being touched.
 
+## Features
+- Ability to travel in all 2D directions (up, down, left, and right)
+- Splash screen with instructions on how to play
+- A score counter / multiple lives
+
 ## Music / Sounds
 A music and sound were created myself. Most of my music can be found a the link below:
 
