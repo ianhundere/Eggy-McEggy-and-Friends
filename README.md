@@ -6,8 +6,8 @@ A  simple shooter made with Python using Pygame library. The player has 3 lives 
 ## Music / Sounds
 A music and sound were created myself. Most of my music can be found a the link below:
 
-[Bandcamp](https://grassnose.bandcamp.com/)|
-[SoundCloud](https://soundcloud.com/grassnose)|
+[Bandcamp](https://grassnose.bandcamp.com/) |
+[SoundCloud](https://soundcloud.com/grassnose) |
 [Clyp.it](https://clyp.it/user/3b2ltmbv)
 
 ## How to Play
