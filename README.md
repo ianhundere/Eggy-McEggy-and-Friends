@@ -12,4 +12,4 @@ pythonw eggy.py
 
 hope you enjoy my adventure in pygame / more info can be found in the comments of eggy.py
 
-# eggy-mcggy-and-friends
+![Eggy Screenshots](/eggy.gif)
